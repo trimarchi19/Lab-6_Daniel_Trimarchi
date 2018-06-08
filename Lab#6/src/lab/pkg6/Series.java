@@ -134,6 +134,11 @@ public class Series {
     public void setDuracion(String duracion) {
         this.duracion = duracion;
     }
+
+    @Override
+    public String toString() {
+        return  nombre_serie ;
+    }
     
     
   

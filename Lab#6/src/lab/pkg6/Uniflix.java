@@ -5,7 +5,13 @@
  */
 package lab.pkg6;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,12 +19,28 @@ import javax.swing.DefaultListModel;
  */
 public class Uniflix extends javax.swing.JFrame {
 
+    administrarUS ap = new administrarUS("./usuarios.txt");
+    administrarSeries sp = new administrarSeries("./series.txt");
+    administrarMovies mp = new administrarMovies("./movies.txt");
+
+    ArrayList<Series> s = new ArrayList();
+    ArrayList<Movies> m = new ArrayList();
+    int actual = 0;
+
     /**
      * Creates new form Uniflix
      */
-    public Uniflix() {
+    public Uniflix() throws IOException {
+
         initComponents();
-        
+        us.add(new Usuarios("admin", "admin", "1999-10-29", "45069891821"));
+        ap.cargarArchivo();
+        System.out.println(ap+" ÑÑÑÑ");
+        mp.cargarArchivo();
+        sp.cargarArchivo();
+        System.out.println(mp);
+        System.out.println(sp);
+
     }
 
     /**
@@ -57,68 +79,71 @@ public class Uniflix extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         tf_con = new javax.swing.JPasswordField();
 
-        jd_registrar.getContentPane().setLayout(null);
+        jd_registrar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setText("Contraseña");
-        jd_registrar.getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 110, 92, 55);
+        jd_registrar.getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 92, 55));
 
         jLabel5.setFont(new java.awt.Font("Traditional Arabic", 2, 18)); // NOI18N
         jLabel5.setText("Registrar");
-        jd_registrar.getContentPane().add(jLabel5);
-        jLabel5.setBounds(181, 0, 92, 55);
+        jd_registrar.getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(181, 0, 92, 55));
 
         jLabel6.setText("Tarjeta de Credito");
-        jd_registrar.getContentPane().add(jLabel6);
-        jLabel6.setBounds(10, 170, 92, 55);
+        jd_registrar.getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 92, 55));
 
         jLabel7.setText("Fecha de Nacimiento");
-        jd_registrar.getContentPane().add(jLabel7);
-        jLabel7.setBounds(10, 230, 123, 55);
+        jd_registrar.getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 123, 55));
 
         jLabel8.setText("Usuario");
-        jd_registrar.getContentPane().add(jLabel8);
-        jLabel8.setBounds(10, 50, 92, 55);
-        jd_registrar.getContentPane().add(r_us);
-        r_us.setBounds(150, 60, 172, 35);
-        jd_registrar.getContentPane().add(r_trajeta);
-        r_trajeta.setBounds(150, 180, 172, 33);
-        jd_registrar.getContentPane().add(r_con);
-        r_con.setBounds(150, 120, 172, 40);
-        jd_registrar.getContentPane().add(r_fecha);
-        r_fecha.setBounds(150, 230, 173, 42);
+        jd_registrar.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 92, 55));
+        jd_registrar.getContentPane().add(r_us, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 172, 35));
+        jd_registrar.getContentPane().add(r_trajeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 172, 33));
+        jd_registrar.getContentPane().add(r_con, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 172, 40));
+
+        r_fecha.setDateFormatString("yyyy-MM-dd");
+        jd_registrar.getContentPane().add(r_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 173, 42));
 
         jButton1.setText("Registrar");
-        jd_registrar.getContentPane().add(jButton1);
-        jButton1.setBounds(470, 410, 129, 45);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jd_registrar.getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 355, 140, 60));
 
         jLabel9.setText("Series");
-        jd_registrar.getContentPane().add(jLabel9);
-        jLabel9.setBounds(30, 310, 80, 20);
+        jd_registrar.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 80, 20));
 
         j_series.setModel(new DefaultListModel());
         jScrollPane1.setViewportView(j_series);
 
-        jd_registrar.getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(30, 340, 200, 150);
+        jd_registrar.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 200, 150));
 
         j_movies.setModel(new DefaultListModel());
         jScrollPane2.setViewportView(j_movies);
 
-        jd_registrar.getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(420, 80, 170, 160);
+        jd_registrar.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, 170, 160));
 
-        cb_movies.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jd_registrar.getContentPane().add(cb_movies);
-        cb_movies.setBounds(470, 30, 110, 30);
+        cb_movies.setMaximumRowCount(12);
+        cb_movies.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Peliculas", "matrix", "GGO", "SAO", "Under", "Horizon", "Beyond" }));
+        cb_movies.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_moviesItemStateChanged(evt);
+            }
+        });
+        jd_registrar.getContentPane().add(cb_movies, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 110, 30));
 
-        cb_series.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jd_registrar.getContentPane().add(cb_series);
-        cb_series.setBounds(120, 300, 110, 30);
+        cb_series.setMaximumRowCount(12);
+        cb_series.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Series", "DRG", "hola", "naruto", "nantasu" }));
+        cb_series.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_seriesItemStateChanged(evt);
+            }
+        });
+        jd_registrar.getContentPane().add(cb_series, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 110, 30));
 
         jLabel10.setText("Peliculas");
-        jd_registrar.getContentPane().add(jLabel10);
-        jLabel10.setBounds(470, 240, 120, 30);
+        jd_registrar.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 120, 30));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -196,6 +221,77 @@ public class Uniflix extends javax.swing.JFrame {
         jd_registrar.setVisible(true);
     }//GEN-LAST:event_registrarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String usuario = r_us.getText();
+        String contra = r_con.getText();
+        String fecha = r_fecha.getDate().toString();
+        ArrayList<Series> series = new ArrayList();
+        ArrayList<Movies> movies = new ArrayList();
+        DefaultListModel modelo
+                = (DefaultListModel) j_series.getModel();
+        DefaultListModel modelo2
+                = (DefaultListModel) j_movies.getModel();
+        for (int i = 0; i < modelo.size(); i++) {
+            series.add(new Series());
+            series.get(i).setNombre_serie(modelo.get(i).toString());
+
+        }
+        for (int i = 0; i < modelo2.size(); i++) {
+            movies.add(new Movies());
+            movies.get(i).setNombre_pelicula(modelo2.get(i).toString());
+
+        }
+        String tarjeta = r_trajeta.getText();
+        r_us.setText("");
+        r_con.setText("");
+        r_fecha.setDate(new Date());
+        r_trajeta.setText("");
+        j_series.removeAll();
+        j_movies.removeAll();
+        us.add(new Usuarios(contra, usuario, fecha, tarjeta));
+        us.get(actual).setSeries(series);
+        us.get(actual).setMovies(movies);
+        ap.setPersona(us.get(actual));
+        try {
+            ap.escribirArchivo();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+        actual += 1;
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cb_seriesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_seriesItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == 2) {
+            // Contactos s = (Contactos) cb_amigos.getSelectedItem();
+            if (!(cb_series.getSelectedItem().toString().equals("Series"))) {
+                String s = cb_series.getSelectedItem().toString();
+                DefaultListModel modelo
+                        = (DefaultListModel) j_series.getModel();
+                modelo.addElement(s);
+                j_series.setModel(modelo);
+
+            }
+        }
+    }//GEN-LAST:event_cb_seriesItemStateChanged
+
+    private void cb_moviesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_moviesItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == 2) {
+            // Contactos s = (Contactos) cb_amigos.getSelectedItem();
+            if (!(cb_movies.getSelectedItem().toString().equals("Peliculas"))) {
+                String s = cb_movies.getSelectedItem().toString();
+                DefaultListModel modelo
+                        = (DefaultListModel) j_movies.getModel();
+                modelo.addElement(s);
+                j_movies.setModel(modelo);
+            }
+        }
+
+    }//GEN-LAST:event_cb_moviesItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -226,7 +322,11 @@ public class Uniflix extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Uniflix().setVisible(true);
+                try {
+                    new Uniflix().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Uniflix.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -259,4 +359,5 @@ public class Uniflix extends javax.swing.JFrame {
     private javax.swing.JPasswordField tf_con;
     private javax.swing.JTextField tf_us;
     // End of variables declaration//GEN-END:variables
+ArrayList<Usuarios> us = new ArrayList();
 }
