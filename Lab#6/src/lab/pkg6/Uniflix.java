@@ -10,8 +10,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  *
@@ -19,26 +22,26 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Uniflix extends javax.swing.JFrame {
 
-    administrarUS ap = new administrarUS("./usuarios.txt");
+    administrarUS ap = new administrarUS("./US.txt");
     administrarSeries sp = new administrarSeries("./series.txt");
     administrarMovies mp = new administrarMovies("./movies.txt");
 
     ArrayList<Series> s = new ArrayList();
     ArrayList<Movies> m = new ArrayList();
-    int actual = 0;
+    int actual;
 
     /**
      * Creates new form Uniflix
      */
-    public Uniflix()  {
-
+    public Uniflix() {
         initComponents();
         ap.cargarArchivo();
-       System.out.println(ap);
-       sp.cargarArchivo();
-       mp.cargarArchivo();
-        System.out.println(sp);
-        System.out.println(mp);
+        sp.cargarArchivo();
+        mp.cargarArchivo();
+        for (Usuarios u : ap.getListaUs()) {
+            us.add(u);
+        }
+        actual = us.size();
     }
 
     /**
@@ -67,6 +70,13 @@ public class Uniflix extends javax.swing.JFrame {
         cb_movies = new javax.swing.JComboBox<>();
         cb_series = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
+        aplicacion = new javax.swing.JDialog();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        j_tree = new javax.swing.JTree();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        j_list = new javax.swing.JList<>();
+        jToggleButton2 = new javax.swing.JToggleButton();
         ingresar = new javax.swing.JButton();
         registrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -115,7 +125,7 @@ public class Uniflix extends javax.swing.JFrame {
         jd_registrar.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, 170, 160));
 
         cb_movies.setMaximumRowCount(12);
-        cb_movies.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Peliculas", "matrix", "GGO", "SAO", "Under", "Horizon", "Beyond" }));
+        cb_movies.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Peliculas" }));
         cb_movies.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cb_moviesItemStateChanged(evt);
@@ -124,7 +134,7 @@ public class Uniflix extends javax.swing.JFrame {
         jd_registrar.getContentPane().add(cb_movies, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 110, 30));
 
         cb_series.setMaximumRowCount(12);
-        cb_series.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Series", "DRG", "hola", "naruto", "nantasu" }));
+        cb_series.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Series", " " }));
         cb_series.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cb_seriesItemStateChanged(evt);
@@ -135,9 +145,61 @@ public class Uniflix extends javax.swing.JFrame {
         jLabel10.setText("Peliculas");
         jd_registrar.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 120, 30));
 
+        jToggleButton1.setText("Agergar A la Lista");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Uniflix");
+        j_tree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane3.setViewportView(j_tree);
+
+        j_list.setModel(new DefaultListModel());
+        jScrollPane4.setViewportView(j_list);
+
+        jToggleButton2.setText("-->");
+
+        javax.swing.GroupLayout aplicacionLayout = new javax.swing.GroupLayout(aplicacion.getContentPane());
+        aplicacion.getContentPane().setLayout(aplicacionLayout);
+        aplicacionLayout.setHorizontalGroup(
+            aplicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, aplicacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, aplicacionLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
+        );
+        aplicacionLayout.setVerticalGroup(
+            aplicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(aplicacionLayout.createSequentialGroup()
+                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addGroup(aplicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4)
+                    .addGroup(aplicacionLayout.createSequentialGroup()
+                        .addGap(143, 143, 143)
+                        .addComponent(jToggleButton2))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         ingresar.setText("Ingresar");
+        ingresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ingresarActionPerformed(evt);
+            }
+        });
 
         registrar.setText("Registrar");
         registrar.addActionListener(new java.awt.event.ActionListener() {
@@ -205,10 +267,23 @@ public class Uniflix extends javax.swing.JFrame {
 
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
         // TODO add your handling code here:
+
+        DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_series.getModel();
+        DefaultComboBoxModel modelo2 = (DefaultComboBoxModel) cb_movies.getModel();
+        for (Series s : sp.getListaMovies()) {
+            System.out.println(s.getNombre_serie());
+            modelo.addElement(s.getNombre_serie());
+        }
+        for (Movies s : mp.getListaMovies()) {
+            modelo2.addElement(s.getNombre_pelicula());
+        }
+        cb_series.setModel(modelo);
+        cb_movies.setModel(modelo2);
         jd_registrar.setModal(true);
         jd_registrar.pack();
         jd_registrar.setLocationRelativeTo(this);
         jd_registrar.setVisible(true);
+
     }//GEN-LAST:event_registrarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -235,13 +310,14 @@ public class Uniflix extends javax.swing.JFrame {
         r_us.setText("");
         r_con.setText("");
         r_trajeta.setText("");
-        j_series.removeAll();
-        j_movies.removeAll();
+        modelo.removeAllElements();
+        modelo2.removeAllElements();
+        j_series.setModel(modelo);
+        j_movies.setModel(modelo2);
         us.add(new Usuarios(contra, usuario, tarjeta));
         us.get(actual).setSeries(series);
         us.get(actual).setMovies(movies);
         ap.setPersona(us.get(actual));
-        
         //System.out.println(ap+"---");
         try {
             ap.escribirArchivo();
@@ -282,6 +358,45 @@ public class Uniflix extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cb_moviesItemStateChanged
 
+    private void ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarActionPerformed
+        // TODO add your handling code here:
+        String us1 = tf_us.getText();
+        String con = tf_con.getText();
+
+        int cont = 0;
+        for (Usuarios u : us) {
+            if (u.getCorreo().contains(us1) && u.getContraseña().equals(con)) {
+                cont = 1;
+            }
+        }
+        if (cont == 0) {
+            JOptionPane.showMessageDialog(this, "No se ha Encontrado el Usuario");
+        }
+        if (cont == 1) {
+            DefaultMutableTreeNode raiz=(DefaultMutableTreeNode)j_tree.getModel();
+            DefaultListModel modelo = (DefaultListModel) j_list.getModel();
+            System.out.println("¡¡¡");
+            for (Series s : sp.getListaMovies()) {
+                System.out.println("---");
+                modelo.addElement(s);
+            }
+            for (Movies m : mp.getListaMovies()) {
+                modelo.addElement(m);
+            }
+            j_list.setModel(modelo);
+            aplicacion.setModal(true);
+            aplicacion.pack();
+            aplicacion.setLocationRelativeTo(this);
+            aplicacion.setVisible(true);
+        }
+
+
+    }//GEN-LAST:event_ingresarActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -312,14 +427,15 @@ public class Uniflix extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
-                    new Uniflix().setVisible(true);
-                
+
+                new Uniflix().setVisible(true);
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog aplicacion;
     private javax.swing.JComboBox<String> cb_movies;
     private javax.swing.JComboBox<String> cb_series;
     private javax.swing.JButton ingresar;
@@ -335,8 +451,14 @@ public class Uniflix extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JList<String> j_list;
     private javax.swing.JList<String> j_movies;
     private javax.swing.JList<String> j_series;
+    private javax.swing.JTree j_tree;
     private javax.swing.JDialog jd_registrar;
     private javax.swing.JPasswordField r_con;
     private javax.swing.JTextField r_trajeta;

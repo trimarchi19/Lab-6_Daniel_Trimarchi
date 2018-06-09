@@ -88,10 +88,12 @@ public class administrarMovies {
                     d=sc.next();
                     e=sc.next();
                     f=sc.next();
-                    g=sc.next();                           
+                    g=sc.next(); 
+                 
                     listaMovies.add(new Movies(a, b, c, d, e, f, g));
                 }//Fin del WHILE TOTAL
             } catch (Exception e) {
+                System.out.println(e);
             }
             sc.close();
         }//Fin del If
