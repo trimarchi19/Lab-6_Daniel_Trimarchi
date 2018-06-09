@@ -30,17 +30,15 @@ public class Uniflix extends javax.swing.JFrame {
     /**
      * Creates new form Uniflix
      */
-    public Uniflix() throws IOException {
+    public Uniflix()  {
 
         initComponents();
-        us.add(new Usuarios("admin", "admin", "1999-10-29", "45069891821"));
         ap.cargarArchivo();
-        System.out.println(ap+" ÑÑÑÑ");
-        mp.cargarArchivo();
-        sp.cargarArchivo();
-        System.out.println(mp);
+       System.out.println(ap);
+       sp.cargarArchivo();
+       mp.cargarArchivo();
         System.out.println(sp);
-
+        System.out.println(mp);
     }
 
     /**
@@ -56,12 +54,10 @@ public class Uniflix extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         r_us = new javax.swing.JTextField();
         r_trajeta = new javax.swing.JTextField();
         r_con = new javax.swing.JPasswordField();
-        r_fecha = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -91,17 +87,11 @@ public class Uniflix extends javax.swing.JFrame {
         jLabel6.setText("Tarjeta de Credito");
         jd_registrar.getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 92, 55));
 
-        jLabel7.setText("Fecha de Nacimiento");
-        jd_registrar.getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 123, 55));
-
         jLabel8.setText("Usuario");
         jd_registrar.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 92, 55));
         jd_registrar.getContentPane().add(r_us, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 172, 35));
         jd_registrar.getContentPane().add(r_trajeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 172, 33));
         jd_registrar.getContentPane().add(r_con, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 172, 40));
-
-        r_fecha.setDateFormatString("yyyy-MM-dd");
-        jd_registrar.getContentPane().add(r_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 173, 42));
 
         jButton1.setText("Registrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -112,12 +102,12 @@ public class Uniflix extends javax.swing.JFrame {
         jd_registrar.getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 355, 140, 60));
 
         jLabel9.setText("Series");
-        jd_registrar.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 80, 20));
+        jd_registrar.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 80, 20));
 
         j_series.setModel(new DefaultListModel());
         jScrollPane1.setViewportView(j_series);
 
-        jd_registrar.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 200, 150));
+        jd_registrar.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 200, 150));
 
         j_movies.setModel(new DefaultListModel());
         jScrollPane2.setViewportView(j_movies);
@@ -140,7 +130,7 @@ public class Uniflix extends javax.swing.JFrame {
                 cb_seriesItemStateChanged(evt);
             }
         });
-        jd_registrar.getContentPane().add(cb_series, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 110, 30));
+        jd_registrar.getContentPane().add(cb_series, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 110, 30));
 
         jLabel10.setText("Peliculas");
         jd_registrar.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 120, 30));
@@ -225,7 +215,6 @@ public class Uniflix extends javax.swing.JFrame {
         // TODO add your handling code here:
         String usuario = r_us.getText();
         String contra = r_con.getText();
-        String fecha = r_fecha.getDate().toString();
         ArrayList<Series> series = new ArrayList();
         ArrayList<Movies> movies = new ArrayList();
         DefaultListModel modelo
@@ -245,14 +234,15 @@ public class Uniflix extends javax.swing.JFrame {
         String tarjeta = r_trajeta.getText();
         r_us.setText("");
         r_con.setText("");
-        r_fecha.setDate(new Date());
         r_trajeta.setText("");
         j_series.removeAll();
         j_movies.removeAll();
-        us.add(new Usuarios(contra, usuario, fecha, tarjeta));
+        us.add(new Usuarios(contra, usuario, tarjeta));
         us.get(actual).setSeries(series);
         us.get(actual).setMovies(movies);
         ap.setPersona(us.get(actual));
+        
+        //System.out.println(ap+"---");
         try {
             ap.escribirArchivo();
         } catch (IOException ex) {
@@ -322,11 +312,9 @@ public class Uniflix extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
+                
                     new Uniflix().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(Uniflix.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                
             }
         });
     }
@@ -343,7 +331,6 @@ public class Uniflix extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -352,7 +339,6 @@ public class Uniflix extends javax.swing.JFrame {
     private javax.swing.JList<String> j_series;
     private javax.swing.JDialog jd_registrar;
     private javax.swing.JPasswordField r_con;
-    private com.toedter.calendar.JDateChooser r_fecha;
     private javax.swing.JTextField r_trajeta;
     private javax.swing.JTextField r_us;
     private javax.swing.JButton registrar;

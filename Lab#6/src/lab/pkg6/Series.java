@@ -26,6 +26,7 @@ public class Series {
     private String duracion;
 
     public Series() {
+        
     }
 
     public Series(String id_serie, String nombre_serie, String categoria, String temporadas, String Director, String productora, String rating, String duracion) {

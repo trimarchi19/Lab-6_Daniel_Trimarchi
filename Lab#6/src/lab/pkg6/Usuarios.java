@@ -16,7 +16,6 @@ public class Usuarios {
 
     private String contraseña;
     private String correo;
-    private String fecha;
     private ArrayList<Series> series=new ArrayList();
     private ArrayList<Movies> movies=new ArrayList();
     private String tarjeta;
@@ -25,10 +24,9 @@ public class Usuarios {
         
     }
 
-    public Usuarios(String contraseña, String correo, String fecha, String tarjeta) {
+    public Usuarios(String contraseña, String correo, String tarjeta) {
         this.contraseña = contraseña;
         this.correo = correo;
-        this.fecha = fecha;
         this.tarjeta = tarjeta;
     }
     
@@ -53,13 +51,6 @@ public class Usuarios {
         this.correo = correo;
     }
 
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
 
     public ArrayList<Series> getSeries() {
         return series;
@@ -84,6 +75,13 @@ public class Usuarios {
     public void setTarjeta(String tarjeta) {
         this.tarjeta = tarjeta;
     }
+
+    @Override
+    public String toString() {
+        return "Usuarios{" + "contrase\u00f1a=" + contraseña + ", correo=" + correo + ", series=" + series + ", movies=" + movies + ", tarjeta=" + tarjeta + '}';
+    }
+
+ 
     
     
 

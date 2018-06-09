@@ -97,7 +97,7 @@ public class administrarSeries {
                 }//Fin del WHILE TOTAL
             } catch (Exception e) {
                 System.out.println(e);
-                e.printStackTrace();
+                
             }
             sc.close();
         }//Fin del If
