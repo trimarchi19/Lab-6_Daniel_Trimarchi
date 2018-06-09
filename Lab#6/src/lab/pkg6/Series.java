@@ -29,6 +29,16 @@ public class Series {
         
     }
 
+    public Series(String nombre_serie) {
+        this.nombre_serie = nombre_serie;
+    }
+
+    public Series(String nombre_serie, String categoria) {
+        this.nombre_serie = nombre_serie;
+        this.categoria = categoria;
+    }
+    
+
     public Series(String id_serie, String nombre_serie, String categoria, String temporadas, String Director, String productora, String rating, String duracion) {
         this.id_serie = id_serie;
         this.nombre_serie = nombre_serie;

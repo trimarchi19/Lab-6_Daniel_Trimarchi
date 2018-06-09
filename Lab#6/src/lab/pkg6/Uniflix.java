@@ -15,6 +15,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -270,12 +271,13 @@ public class Uniflix extends javax.swing.JFrame {
 
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_series.getModel();
         DefaultComboBoxModel modelo2 = (DefaultComboBoxModel) cb_movies.getModel();
+       int cont=0;
         for (Series s : sp.getListaMovies()) {
             System.out.println(s.getNombre_serie());
-            modelo.addElement(s.getNombre_serie());
+            modelo.addElement(new Series(s.getNombre_serie(),s.getCategoria()));
         }
         for (Movies s : mp.getListaMovies()) {
-            modelo2.addElement(s.getNombre_pelicula());
+            modelo2.addElement(s);
         }
         cb_series.setModel(modelo);
         cb_movies.setModel(modelo2);
@@ -362,27 +364,86 @@ public class Uniflix extends javax.swing.JFrame {
         // TODO add your handling code here:
         String us1 = tf_us.getText();
         String con = tf_con.getText();
-
+        actual=actual-1;
+        int con_us=0;
         int cont = 0;
+        System.out.println(us.get(1).getSeries().get(0).getCategoria()+"---"+us.get(1).getSeries().get(0).getNombre_serie());
         for (Usuarios u : us) {
             if (u.getCorreo().contains(us1) && u.getContraseña().equals(con)) {
                 cont = 1;
+
             }
         }
         if (cont == 0) {
             JOptionPane.showMessageDialog(this, "No se ha Encontrado el Usuario");
         }
         if (cont == 1) {
-            DefaultMutableTreeNode raiz=(DefaultMutableTreeNode)j_tree.getModel();
+            
             DefaultListModel modelo = (DefaultListModel) j_list.getModel();
-            System.out.println("¡¡¡");
             for (Series s : sp.getListaMovies()) {
-                System.out.println("---");
                 modelo.addElement(s);
+                System.out.println(s+"-"+s.getCategoria());
             }
             for (Movies m : mp.getListaMovies()) {
                 modelo.addElement(m);
             }
+                         DefaultTreeModel modeloARBOL
+                    = (DefaultTreeModel) j_tree.getModel();
+            DefaultMutableTreeNode raiz
+                    = (DefaultMutableTreeNode) modeloARBOL.getRoot();
+            
+            
+          
+            
+            for (int k=0;k<us.get(actual).getSeries().size();k++) {
+            int centinela = -1;
+            int centinela2 = -1;
+         
+            for (int i = 0; i < raiz.getChildCount(); i++) {          
+                if (raiz.getChildAt(i).toString().
+                        equals(us.get(actual).getSeries().get(k).getCategoria())){ 
+                    System.out.println("JJJJJJJJJJJJJJJJJJ");
+                    for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
+                        System.out.println("......");
+                        if (raiz.getChildAt(i).getChildAt(j).toString().
+                                contains(us.get(actual).getSeries().get(k).getNombre_serie())) {
+                            centinela2 = 1;
+                       
+                        }
+                    }
+
+                    if (centinela2 == -1) {
+                        System.out.println("mmmmmmmmmmmm");
+                        DefaultMutableTreeNode p
+                                = new DefaultMutableTreeNode(
+                                        new Series(us.get(actual).getSeries().get(k).getNombre_serie())
+                                );
+                        ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
+
+                    }
+                    centinela = 1;
+
+                }
+            }
+            if (centinela == -1) {
+                System.out.println("HHHHH--------------");
+                System.out.println(us.get(actual).getSeries().get(k).getCategoria());
+                DefaultMutableTreeNode n
+                        = new DefaultMutableTreeNode(us.get(actual).getSeries().get(k).getCategoria());
+
+                DefaultMutableTreeNode p
+                        = new DefaultMutableTreeNode(
+                                new Series(us.get(actual).getSeries().get(k).getNombre_serie()) 
+                        );
+                n.add(p);
+                raiz.add(n);
+            }
+            
+                
+            }
+            modeloARBOL.reload();
+        
+            
             j_list.setModel(modelo);
             aplicacion.setModal(true);
             aplicacion.pack();

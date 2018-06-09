@@ -64,7 +64,6 @@ public class administrarUS {
                 bw.write(t.getContraseña() + ";");
                 for (Series s : t.getSeries()) {
                     bw.write(s.getNombre_serie() + ",");
-
                 }
                 bw.write(";");
                 for (Movies m : t.getMovies()) {
@@ -107,26 +106,45 @@ public class administrarUS {
                         System.out.println(e);
                         System.out.println("-------------------");
                          */
-                        StringTokenizer st1 = new StringTokenizer(d, ";");
-                        StringTokenizer st2 = new StringTokenizer(e, ";");
+                        Scanner st1=new Scanner(c);
+                        st1.useDelimiter(",");
+                        StringTokenizer st2 = new StringTokenizer(d, ";");
                         int x = 0;
-
-                        while (st1.hasMoreElements()) {
+                      while (st1.hasNext()) {                           
                             temp.add(new Series());
-                            temp.get(x).setNombre_serie(st1.nextToken());
+                            temp.get(x).setNombre_serie(st1.next());
                             x += 1;
                         }
+                       System.out.println(temp+"lll");
                         x = 0;
                         while (st2.hasMoreElements()) {
                             temp2.add(new Movies());
                             temp2.get(x).setNombre_pelicula(st2.nextToken());
                             x += 1;
                         }
+                       System.out.println(temp2+"ll*****************l");
                         listaUs.add(new Usuarios(a, b, e));
                         listaUs.get(listaUs.size() - 1).setSeries(temp);
                         listaUs.get(listaUs.size() - 1).setMovies(temp2);
+                       
                     }
                 }//Fin del WHILE TOTAL
+                    administrarSeries sp = new administrarSeries("./series.txt");
+                    sp.cargarArchivo();
+                 System.out.println(listaUs.get(1).getSeries());
+                 for(int j=0;j<listaUs.get(1).getSeries().size();j++){
+                     
+                     for(int k=0;k<sp.getListaMovies().size();k++){
+                         System.out.println(listaUs.get(1).getSeries().get(j).getNombre_serie()+"---"+
+                             sp.getListaMovies().get(k).getNombre_serie()  );
+                     if(listaUs.get(1).getSeries().get(j).getNombre_serie().contains(
+                             sp.getListaMovies().get(k).getNombre_serie())){
+                         System.out.println("SIMOON");
+                         listaUs.get(1).getSeries().get(j).setCategoria(
+                                 sp.getListaMovies().get(k).getCategoria());
+                     }
+                     }
+                 }
             } catch (Exception e) {
                 System.out.println(e);
 
