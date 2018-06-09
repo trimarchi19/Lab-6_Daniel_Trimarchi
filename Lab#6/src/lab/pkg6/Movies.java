@@ -29,6 +29,16 @@ public class Movies {
     public Movies() {
     }
 
+    public Movies(String nombre_pelicula) {
+        this.nombre_pelicula = nombre_pelicula;
+    }
+
+    public Movies(String nombre_pelicula, String categoria) {
+        this.nombre_pelicula = nombre_pelicula;
+        this.categoria = categoria;
+    }
+    
+
     public Movies(String id_pelicula, String nombre_pelicula, String categoria, String Director, String productora, String rating, String duracion) {
         this.id_pelicula = id_pelicula;
         this.nombre_pelicula = nombre_pelicula;

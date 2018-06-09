@@ -72,12 +72,12 @@ public class Uniflix extends javax.swing.JFrame {
         cb_series = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         aplicacion = new javax.swing.JDialog();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        agregar = new javax.swing.JToggleButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         j_tree = new javax.swing.JTree();
         jScrollPane4 = new javax.swing.JScrollPane();
         j_list = new javax.swing.JList<>();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        enviar = new javax.swing.JToggleButton();
         ingresar = new javax.swing.JButton();
         registrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -146,10 +146,10 @@ public class Uniflix extends javax.swing.JFrame {
         jLabel10.setText("Peliculas");
         jd_registrar.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 120, 30));
 
-        jToggleButton1.setText("Agergar A la Lista");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        agregar.setText("Agergar A la Lista");
+        agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                agregarActionPerformed(evt);
             }
         });
 
@@ -160,7 +160,12 @@ public class Uniflix extends javax.swing.JFrame {
         j_list.setModel(new DefaultListModel());
         jScrollPane4.setViewportView(j_list);
 
-        jToggleButton2.setText("-->");
+        enviar.setText("-->");
+        enviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enviarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout aplicacionLayout = new javax.swing.GroupLayout(aplicacion.getContentPane());
         aplicacion.getContentPane().setLayout(aplicacionLayout);
@@ -170,25 +175,25 @@ public class Uniflix extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(enviar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, aplicacionLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
         aplicacionLayout.setVerticalGroup(
             aplicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(aplicacionLayout.createSequentialGroup()
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
                 .addGroup(aplicacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane4)
                     .addGroup(aplicacionLayout.createSequentialGroup()
                         .addGap(143, 143, 143)
-                        .addComponent(jToggleButton2))
+                        .addComponent(enviar))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
@@ -271,10 +276,10 @@ public class Uniflix extends javax.swing.JFrame {
 
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_series.getModel();
         DefaultComboBoxModel modelo2 = (DefaultComboBoxModel) cb_movies.getModel();
-       int cont=0;
+        int cont = 0;
         for (Series s : sp.getListaMovies()) {
             System.out.println(s.getNombre_serie());
-            modelo.addElement(new Series(s.getNombre_serie(),s.getCategoria()));
+            modelo.addElement(new Series(s.getNombre_serie(), s.getCategoria()));
         }
         for (Movies s : mp.getListaMovies()) {
             modelo2.addElement(s);
@@ -327,6 +332,9 @@ public class Uniflix extends javax.swing.JFrame {
             System.out.println(ex);
         }
         actual += 1;
+        ap.cargarArchivo();
+        sp.cargarArchivo();
+        mp.cargarArchivo();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -334,7 +342,8 @@ public class Uniflix extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (evt.getStateChange() == 2) {
             // Contactos s = (Contactos) cb_amigos.getSelectedItem();
-            if (!(cb_series.getSelectedItem().toString().equals("Series"))) {
+            if (!(cb_series.getSelectedItem().toString().equals("Series")
+                    || cb_series.getSelectedItem().toString().equals(" "))) {
                 String s = cb_series.getSelectedItem().toString();
                 DefaultListModel modelo
                         = (DefaultListModel) j_series.getModel();
@@ -362,88 +371,145 @@ public class Uniflix extends javax.swing.JFrame {
 
     private void ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarActionPerformed
         // TODO add your handling code here:
+
         String us1 = tf_us.getText();
         String con = tf_con.getText();
-        actual=actual-1;
-        int con_us=0;
+        int actual = 0;
+        int con_us = 0;
         int cont = 0;
-        System.out.println(us.get(1).getSeries().get(0).getCategoria()+"---"+us.get(1).getSeries().get(0).getNombre_serie());
+
+        System.out.println(us.get(1).getSeries().get(0).getCategoria() + "---" + us.get(1).getSeries().get(0).getNombre_serie());
         for (Usuarios u : us) {
             if (u.getCorreo().contains(us1) && u.getContraseña().equals(con)) {
                 cont = 1;
-
+                actual = con_us;
             }
+            con_us += 1;
         }
         if (cont == 0) {
             JOptionPane.showMessageDialog(this, "No se ha Encontrado el Usuario");
         }
         if (cont == 1) {
-            
+            actualizar_list();
             DefaultListModel modelo = (DefaultListModel) j_list.getModel();
             for (Series s : sp.getListaMovies()) {
                 modelo.addElement(s);
-                System.out.println(s+"-"+s.getCategoria());
             }
             for (Movies m : mp.getListaMovies()) {
                 modelo.addElement(m);
             }
-                         DefaultTreeModel modeloARBOL
+            DefaultTreeModel modeloARBOL
                     = (DefaultTreeModel) j_tree.getModel();
             DefaultMutableTreeNode raiz
                     = (DefaultMutableTreeNode) modeloARBOL.getRoot();
-            
-            
-          
-            
-            for (int k=0;k<us.get(actual).getSeries().size();k++) {
-            int centinela = -1;
-            int centinela2 = -1;
-         
-            for (int i = 0; i < raiz.getChildCount(); i++) {          
-                if (raiz.getChildAt(i).toString().
-                        equals(us.get(actual).getSeries().get(k).getCategoria())){ 
-                    System.out.println("JJJJJJJJJJJJJJJJJJ");
-                    for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
-                        System.out.println("......");
-                        if (raiz.getChildAt(i).getChildAt(j).toString().
-                                contains(us.get(actual).getSeries().get(k).getNombre_serie())) {
-                            centinela2 = 1;
-                       
+            String Categoria = "";
+            String nombre = "";
+            raiz.removeAllChildren();
+            for (int k = 0; k < us.get(actual).getSeries().size(); k++) {
+                int centinela = -1;
+                int centinela2 = -1;
+
+                for (int i = 0; i < raiz.getChildCount(); i++) {
+                    if (raiz.getChildAt(i).toString().
+                            equals(us.get(actual).getSeries().get(k).getCategoria())) {
+                        for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
+                            if (raiz.getChildAt(i).getChildAt(j).toString().
+                                    contains(us.get(actual).getSeries().get(k).getNombre_serie())) {
+                                centinela2 = 1;
+
+                            }
                         }
+
+                        if (centinela2 == -1) {
+                            nombre = us.get(actual).getSeries().get(k).getNombre_serie();
+                            nombre = nombre.replaceAll(" ", "");
+                            DefaultMutableTreeNode p
+                                    = new DefaultMutableTreeNode(
+                                            new Series(nombre)
+                                    );
+                            ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
+
+                        }
+                        centinela = 1;
+
                     }
-
-                    if (centinela2 == -1) {
-                        System.out.println("mmmmmmmmmmmm");
-                        DefaultMutableTreeNode p
-                                = new DefaultMutableTreeNode(
-                                        new Series(us.get(actual).getSeries().get(k).getNombre_serie())
-                                );
-                        ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
-
-                    }
-                    centinela = 1;
-
                 }
-            }
-            if (centinela == -1) {
-                System.out.println("HHHHH--------------");
-                System.out.println(us.get(actual).getSeries().get(k).getCategoria());
-                DefaultMutableTreeNode n
-                        = new DefaultMutableTreeNode(us.get(actual).getSeries().get(k).getCategoria());
+                if (centinela == -1) {
+                    Categoria = us.get(actual).getSeries().get(k).getCategoria();
+                    nombre = us.get(actual).getSeries().get(k).getNombre_serie();
+                    Categoria = Categoria.replaceAll(" ", "");
+                    nombre = nombre.replaceAll(" ", "");
 
-                DefaultMutableTreeNode p
-                        = new DefaultMutableTreeNode(
-                                new Series(us.get(actual).getSeries().get(k).getNombre_serie()) 
-                        );
-                n.add(p);
-                raiz.add(n);
+                    DefaultMutableTreeNode n
+                            = new DefaultMutableTreeNode(Categoria);
+
+                    DefaultMutableTreeNode p
+                            = new DefaultMutableTreeNode(
+                                    new Series(nombre)
+                            );
+                    n.add(p);
+                    raiz.add(n);
+                }
+                //---------------------------------------------------------------------------------
+
             }
-            
-                
+            for (int k = 0; k < us.get(actual).getMovies().size(); k++) {
+                int centinela = -1;
+                int centinela2 = -1;
+
+                for (int i = 0; i < raiz.getChildCount(); i++) {
+                    if (raiz.getChildAt(i).toString().
+                            equals(us.get(actual).getMovies().get(k).getCategoria())) {
+                        for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
+                            System.out.println("......");
+                            if (raiz.getChildAt(i).getChildAt(j).toString().
+                                    contains(us.get(actual).getMovies().get(k).getNombre_pelicula())) {
+                                centinela2 = 1;
+
+                            }
+                        }
+
+                        if (centinela2 == -1) {
+                            nombre = us.get(actual).getMovies().get(k).getNombre_pelicula();
+                            nombre = nombre.replaceAll(" ", "");
+                            DefaultMutableTreeNode p
+                                    = new DefaultMutableTreeNode(
+                                            new Movies(nombre)
+                                    );
+                            ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
+
+                        }
+                        centinela = 1;
+
+                    }
+                }
+                if (centinela == -1) {
+
+                    Categoria = us.get(actual).getMovies().get(k).getCategoria();
+                    nombre = us.get(actual).getMovies().get(k).getNombre_pelicula();
+                    Categoria = Categoria.replaceAll(" ", "");
+                    nombre = nombre.replaceAll(" ", "");
+
+                    DefaultMutableTreeNode n
+                            = new DefaultMutableTreeNode(Categoria);
+
+                    DefaultMutableTreeNode p
+                            = new DefaultMutableTreeNode(
+                                    new Series(nombre)
+                            );
+                    n.add(p);
+                    raiz.add(n);
+                }
+                //---------------------------------------------------------------------------------
+
+            }
+            if (us.get(actual).getCorreo().contains("admin")) {
+                agregar.setVisible(true);
+            } else {
+                agregar.setVisible(false);
             }
             modeloARBOL.reload();
-        
-            
+
             j_list.setModel(modelo);
             aplicacion.setModal(true);
             aplicacion.pack();
@@ -454,9 +520,111 @@ public class Uniflix extends javax.swing.JFrame {
 
     }//GEN-LAST:event_ingresarActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_agregarActionPerformed
+
+    private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
+        // TODO add your handling code here:
+        if (j_list.getSelectedIndex() >= 0) {
+            DefaultTreeModel modeloARBOL
+                    = (DefaultTreeModel) j_tree.getModel();
+            DefaultMutableTreeNode raiz
+                    = (DefaultMutableTreeNode) modeloARBOL.getRoot();
+            //obtener la persona a guardar
+            DefaultListModel modeloLISTA
+                    = (DefaultListModel) j_list.getModel();
+            String Categoria, nombre;
+            int edad;
+            int centinela = -1;
+            int centinela2 = -1;
+            if (modeloLISTA.get(j_list.getSelectedIndex()) instanceof Series) {
+                Categoria = ((Series) modeloLISTA.get(j_list.getSelectedIndex())).getCategoria();
+                nombre = ((Series) modeloLISTA.get(j_list.getSelectedIndex())).getNombre_serie();
+                Categoria = Categoria.replaceAll(" ", "");
+                nombre = nombre.replaceAll(" ", "");
+                for (int i = 0; i < raiz.getChildCount(); i++) {
+                    if (Categoria.
+                            contains(raiz.getChildAt(i).toString())) {
+
+                        for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
+                            if (raiz.getChildAt(i).getChildAt(j).toString().
+                                    equals(nombre)) {
+                                centinela2 = 1;
+
+                            }
+                        }
+
+                        if (centinela2 == -1) {
+                            DefaultMutableTreeNode p
+                                    = new DefaultMutableTreeNode(
+                                            new Series(nombre, Categoria)
+                                    );
+                            ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
+
+                        }
+                        centinela = 1;
+
+                    }
+                }
+                if (centinela == -1) {
+                    DefaultMutableTreeNode n
+                            = new DefaultMutableTreeNode(Categoria);
+
+                    DefaultMutableTreeNode p
+                            = new DefaultMutableTreeNode(
+                                    new Series(nombre,
+                                            Categoria)
+                            );
+                    n.add(p);
+                    raiz.add(n);
+                }
+            } else if (modeloLISTA.get(j_list.getSelectedIndex()) instanceof Movies) {
+                Categoria = ((Movies) modeloLISTA.get(j_list.getSelectedIndex())).getCategoria();
+                nombre = ((Movies) modeloLISTA.get(j_list.getSelectedIndex())).getNombre_pelicula();
+                Categoria = Categoria.replaceAll(" ", "");
+                nombre = nombre.replaceAll(" ", "");
+                for (int i = 0; i < raiz.getChildCount(); i++) {
+                    if (Categoria.
+                            contains(raiz.getChildAt(i).toString())) {
+
+                        for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
+                            if (raiz.getChildAt(i).getChildAt(j).toString().
+                                    contains(nombre)) {
+                                centinela2 = 1;
+
+                            }
+                        }
+
+                        if (centinela2 == -1) {
+                            DefaultMutableTreeNode p
+                                    = new DefaultMutableTreeNode(
+                                            new Movies(nombre, Categoria)
+                                    );
+                            ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
+
+                        }
+                        centinela = 1;
+
+                    }
+                }
+                if (centinela == -1) {
+                    DefaultMutableTreeNode n
+                            = new DefaultMutableTreeNode(Categoria);
+
+                    DefaultMutableTreeNode p
+                            = new DefaultMutableTreeNode(
+                                    new Movies(nombre,
+                                            Categoria)
+                            );
+                    n.add(p);
+                    raiz.add(n);
+                }
+
+            }
+            modeloARBOL.reload();
+        }
+    }//GEN-LAST:event_enviarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -496,9 +664,11 @@ public class Uniflix extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton agregar;
     private javax.swing.JDialog aplicacion;
     private javax.swing.JComboBox<String> cb_movies;
     private javax.swing.JComboBox<String> cb_series;
+    private javax.swing.JToggleButton enviar;
     private javax.swing.JButton ingresar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -514,8 +684,6 @@ public class Uniflix extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JList<String> j_list;
     private javax.swing.JList<String> j_movies;
     private javax.swing.JList<String> j_series;
@@ -529,4 +697,12 @@ public class Uniflix extends javax.swing.JFrame {
     private javax.swing.JTextField tf_us;
     // End of variables declaration//GEN-END:variables
 ArrayList<Usuarios> us = new ArrayList();
+
+    public void actualizar_list() {
+        ArrayList<Usuarios> s = new ArrayList<>();
+        for (Usuarios u : ap.getListaUs()) {
+            s.add(u);
+        }
+        us = s;
+    }
 }

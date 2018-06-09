@@ -86,6 +86,10 @@ public class administrarUS {
         listaUs = new ArrayList();
         if (archivo.exists()) {
             try {
+                administrarSeries sp = new administrarSeries("./series.txt");
+                administrarMovies mp = new administrarMovies("./movies.txt");
+                mp.cargarArchivo();
+                sp.cargarArchivo();
                 sc = new Scanner(archivo);
                 sc.useDelimiter(";");
                 while (sc.hasNext()) {
@@ -106,45 +110,62 @@ public class administrarUS {
                         System.out.println(e);
                         System.out.println("-------------------");
                          */
-                        Scanner st1=new Scanner(c);
+                        Scanner st1 = new Scanner(c);
                         st1.useDelimiter(",");
-                        StringTokenizer st2 = new StringTokenizer(d, ";");
+                        Scanner st2 = new Scanner(d);
+                        st2.useDelimiter(",");
                         int x = 0;
-                      while (st1.hasNext()) {                           
+                        while (st1.hasNext()) {
                             temp.add(new Series());
                             temp.get(x).setNombre_serie(st1.next());
                             x += 1;
                         }
-                       System.out.println(temp+"lll");
+                        System.out.println(temp + "lll");
                         x = 0;
-                        while (st2.hasMoreElements()) {
+                        while (st2.hasNext()) {
                             temp2.add(new Movies());
-                            temp2.get(x).setNombre_pelicula(st2.nextToken());
+                            temp2.get(x).setNombre_pelicula(st2.next());
                             x += 1;
                         }
-                       System.out.println(temp2+"ll*****************l");
+                        System.out.println(temp2 + "ll*****************l");
                         listaUs.add(new Usuarios(a, b, e));
                         listaUs.get(listaUs.size() - 1).setSeries(temp);
                         listaUs.get(listaUs.size() - 1).setMovies(temp2);
-                       
+
+                        for (int j = 0; j < listaUs.get(listaUs.size() - 1).getSeries().size(); j++) {
+
+                            for (int k = 0; k < sp.getListaMovies().size(); k++) {
+                                System.out.println(listaUs.get(listaUs.size() - 1).getSeries().get(j).getNombre_serie() + "---"
+                                        + sp.getListaMovies().get(k).getNombre_serie());
+                                if (listaUs.get(listaUs.size() - 1).getSeries().get(j).getNombre_serie().contains(
+                                        sp.getListaMovies().get(k).getNombre_serie())) {
+                                    System.out.println("SIMOON");
+                                    listaUs.get(listaUs.size() - 1).getSeries().get(j).setCategoria(
+                                            sp.getListaMovies().get(k).getCategoria());
+                                }
+                            }
+                        }
+                        
+                        System.out.println("###############################################################");
+                            for (int j = 0; j < listaUs.get(listaUs.size() - 1).getMovies().size(); j++) {
+
+                            for (int k = 0; k < sp.getListaMovies().size(); k++) {
+                                System.out.println(listaUs.get(listaUs.size() - 1).getMovies().get(j).getNombre_pelicula() + "---"
+                                        + mp.getListaMovies().get(k).getNombre_pelicula());
+                                if (listaUs.get(listaUs.size() - 1).getMovies().get(j).getNombre_pelicula().contains(
+                                        mp.getListaMovies().get(k).getNombre_pelicula())) {
+                                    System.out.println("SIMOON");
+                                    listaUs.get(listaUs.size() - 1).getMovies().get(j).setCategoria(
+                                            mp.getListaMovies().get(k).getCategoria());
+                                }
+                            }
+                        }
+
                     }
                 }//Fin del WHILE TOTAL
-                    administrarSeries sp = new administrarSeries("./series.txt");
-                    sp.cargarArchivo();
-                 System.out.println(listaUs.get(1).getSeries());
-                 for(int j=0;j<listaUs.get(1).getSeries().size();j++){
-                     
-                     for(int k=0;k<sp.getListaMovies().size();k++){
-                         System.out.println(listaUs.get(1).getSeries().get(j).getNombre_serie()+"---"+
-                             sp.getListaMovies().get(k).getNombre_serie()  );
-                     if(listaUs.get(1).getSeries().get(j).getNombre_serie().contains(
-                             sp.getListaMovies().get(k).getNombre_serie())){
-                         System.out.println("SIMOON");
-                         listaUs.get(1).getSeries().get(j).setCategoria(
-                                 sp.getListaMovies().get(k).getCategoria());
-                     }
-                     }
-                 }
+
+                System.out.println(listaUs.get(1).getSeries());
+
             } catch (Exception e) {
                 System.out.println(e);
 
