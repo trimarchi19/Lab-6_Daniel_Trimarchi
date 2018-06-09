@@ -78,6 +78,28 @@ public class Uniflix extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         j_list = new javax.swing.JList<>();
         enviar = new javax.swing.JToggleButton();
+        s_m = new javax.swing.JDialog();
+        ss = new javax.swing.JRadioButton();
+        mm = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        dura = new javax.swing.JTextField();
+        cat = new javax.swing.JTextField();
+        rat = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
+        temporada = new javax.swing.JTextField();
+        director = new javax.swing.JTextField();
+        productor = new javax.swing.JTextField();
+        idd = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         ingresar = new javax.swing.JButton();
         registrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -197,6 +219,96 @@ public class Uniflix extends javax.swing.JFrame {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
+
+        s_m.getContentPane().setLayout(null);
+
+        buttonGroup1.add(ss);
+        ss.setText("Series");
+        ss.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ssActionPerformed(evt);
+            }
+        });
+        s_m.getContentPane().add(ss);
+        ss.setBounds(10, 20, 120, 30);
+
+        buttonGroup1.add(mm);
+        mm.setText("Movies");
+        s_m.getContentPane().add(mm);
+        mm.setBounds(10, 60, 120, 30);
+
+        jLabel7.setText("Productor");
+        s_m.getContentPane().add(jLabel7);
+        jLabel7.setBounds(10, 340, 97, 36);
+
+        jLabel11.setText("Categoria");
+        s_m.getContentPane().add(jLabel11);
+        jLabel11.setBounds(10, 97, 97, 36);
+
+        jLabel12.setText("Director");
+        s_m.getContentPane().add(jLabel12);
+        jLabel12.setBounds(10, 289, 97, 36);
+
+        jLabel13.setText("Nombr");
+        s_m.getContentPane().add(jLabel13);
+        jLabel13.setBounds(10, 186, 97, 36);
+
+        jLabel14.setText("Rating");
+        s_m.getContentPane().add(jLabel14);
+        jLabel14.setBounds(10, 139, 97, 36);
+
+        jLabel15.setText("Temporadas(si es Serie)");
+        s_m.getContentPane().add(jLabel15);
+        jLabel15.setBounds(10, 235, 143, 36);
+
+        jLabel16.setText("Id");
+        s_m.getContentPane().add(jLabel16);
+        jLabel16.setBounds(340, 90, 40, 56);
+
+        jLabel17.setText("Duracion");
+        s_m.getContentPane().add(jLabel17);
+        jLabel17.setBounds(325, 151, 60, 61);
+        s_m.getContentPane().add(dura);
+        dura.setBounds(390, 160, 100, 40);
+
+        cat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                catActionPerformed(evt);
+            }
+        });
+        s_m.getContentPane().add(cat);
+        cat.setBounds(180, 90, 98, 40);
+        s_m.getContentPane().add(rat);
+        rat.setBounds(180, 140, 98, 40);
+
+        nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreActionPerformed(evt);
+            }
+        });
+        s_m.getContentPane().add(nombre);
+        nombre.setBounds(180, 190, 98, 40);
+        s_m.getContentPane().add(temporada);
+        temporada.setBounds(180, 240, 98, 40);
+        s_m.getContentPane().add(director);
+        director.setBounds(180, 290, 98, 40);
+        s_m.getContentPane().add(productor);
+        productor.setBounds(180, 340, 98, 40);
+        s_m.getContentPane().add(idd);
+        idd.setBounds(390, 90, 98, 40);
+
+        jButton2.setText("Guardar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        s_m.getContentPane().add(jButton2);
+        jButton2.setBounds(400, 323, 140, 50);
+
+        jLabel18.setText("METER SERIES O PELICULAS");
+        s_m.getContentPane().add(jLabel18);
+        jLabel18.setBounds(270, 4, 260, 50);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -410,8 +522,10 @@ public class Uniflix extends javax.swing.JFrame {
                 int centinela2 = -1;
 
                 for (int i = 0; i < raiz.getChildCount(); i++) {
+                    Categoria = us.get(actual).getSeries().get(k).getCategoria();
+                    Categoria = Categoria.replaceAll(" ", "");
                     if (raiz.getChildAt(i).toString().
-                            equals(us.get(actual).getSeries().get(k).getCategoria())) {
+                            contains(Categoria)) {
                         for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
                             if (raiz.getChildAt(i).getChildAt(j).toString().
                                     contains(us.get(actual).getSeries().get(k).getNombre_serie())) {
@@ -458,8 +572,10 @@ public class Uniflix extends javax.swing.JFrame {
                 int centinela2 = -1;
 
                 for (int i = 0; i < raiz.getChildCount(); i++) {
+                    Categoria = us.get(actual).getMovies().get(k).getCategoria();
+                    Categoria = Categoria.replaceAll(" ", "");
                     if (raiz.getChildAt(i).toString().
-                            equals(us.get(actual).getMovies().get(k).getCategoria())) {
+                            contains(Categoria)) {
                         for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
                             System.out.println("......");
                             if (raiz.getChildAt(i).getChildAt(j).toString().
@@ -515,6 +631,8 @@ public class Uniflix extends javax.swing.JFrame {
             aplicacion.pack();
             aplicacion.setLocationRelativeTo(this);
             aplicacion.setVisible(true);
+            tf_con.setText("");
+            tf_us.setText("");
         }
 
 
@@ -522,6 +640,10 @@ public class Uniflix extends javax.swing.JFrame {
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         // TODO add your handling code here:
+        s_m.setModal(true);
+        s_m.pack();
+        s_m.setLocationRelativeTo(this);
+        s_m.setVisible(true);
     }//GEN-LAST:event_agregarActionPerformed
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
@@ -626,6 +748,61 @@ public class Uniflix extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_enviarActionPerformed
 
+    private void ssActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ssActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ssActionPerformed
+
+    private void catActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_catActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_catActionPerformed
+
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if(!(this.nombre.getText().isEmpty()||cat.getText().isEmpty()||this.director.getText().isEmpty()||
+           this.productor.getText().isEmpty()    ||temporada.getText().isEmpty() ||dura.getText().isEmpty()||
+               rat.getText().isEmpty() ||idd.getText().isEmpty()
+                )){
+        String nombre,categoria,id,duracion,temporadas,rating,director,productor,tipo="";
+        nombre=this.nombre.getText();
+        categoria=cat.getText();
+        id=idd.getText();
+        duracion=dura.getText();
+        rating =rat.getText();
+        director=this.director.getText();
+        productor=this.productor.getText();
+        temporadas=temporada.getText();
+        if(ss.isSelected()){
+            tipo="s";
+        }else if(mm.isSelected()){
+            tipo="m";
+        }
+         DefaultListModel modelo=(DefaultListModel) j_list.getModel();
+        if(tipo.equals("s")){
+           
+            modelo.addElement(new Series(id, nombre,categoria,temporadas, director, productor,rating,duracion));
+            
+            
+        }else if(tipo.equals("m")){
+         modelo.addElement(new Movies(id, nombre,categoria, director, productor,rating,duracion));
+            
+        }
+        this.nombre.setText("");
+        this.director.setText("");
+        this.productor.setText("");
+        dura.setText("");
+        rat.setText("");
+        temporada.setText("");
+        idd.setText("");
+        cat.setText("");
+        }else{
+            JOptionPane.showMessageDialog(this, "Debe LLenar Todos Los Parametros");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -666,18 +843,33 @@ public class Uniflix extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton agregar;
     private javax.swing.JDialog aplicacion;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JTextField cat;
     private javax.swing.JComboBox<String> cb_movies;
     private javax.swing.JComboBox<String> cb_series;
+    private javax.swing.JTextField director;
+    private javax.swing.JTextField dura;
     private javax.swing.JToggleButton enviar;
+    private javax.swing.JTextField idd;
     private javax.swing.JButton ingresar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -689,10 +881,17 @@ public class Uniflix extends javax.swing.JFrame {
     private javax.swing.JList<String> j_series;
     private javax.swing.JTree j_tree;
     private javax.swing.JDialog jd_registrar;
+    private javax.swing.JRadioButton mm;
+    private javax.swing.JTextField nombre;
+    private javax.swing.JTextField productor;
     private javax.swing.JPasswordField r_con;
     private javax.swing.JTextField r_trajeta;
     private javax.swing.JTextField r_us;
+    private javax.swing.JTextField rat;
     private javax.swing.JButton registrar;
+    private javax.swing.JDialog s_m;
+    private javax.swing.JRadioButton ss;
+    private javax.swing.JTextField temporada;
     private javax.swing.JPasswordField tf_con;
     private javax.swing.JTextField tf_us;
     // End of variables declaration//GEN-END:variables
