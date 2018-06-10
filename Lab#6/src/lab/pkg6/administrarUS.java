@@ -120,14 +120,14 @@ public class administrarUS {
                             temp.get(x).setNombre_serie(st1.next());
                             x += 1;
                         }
-                        System.out.println(temp + "lll");
+           
                         x = 0;
                         while (st2.hasNext()) {
                             temp2.add(new Movies());
                             temp2.get(x).setNombre_pelicula(st2.next());
                             x += 1;
                         }
-                        System.out.println(temp2 + "ll*****************l");
+                     
                         listaUs.add(new Usuarios(a, b, e));
                         listaUs.get(listaUs.size() - 1).setSeries(temp);
                         listaUs.get(listaUs.size() - 1).setMovies(temp2);
@@ -135,26 +135,24 @@ public class administrarUS {
                         for (int j = 0; j < listaUs.get(listaUs.size() - 1).getSeries().size(); j++) {
 
                             for (int k = 0; k < sp.getListaMovies().size(); k++) {
-                                System.out.println(listaUs.get(listaUs.size() - 1).getSeries().get(j).getNombre_serie() + "---"
-                                        + sp.getListaMovies().get(k).getNombre_serie());
+                              
                                 if (listaUs.get(listaUs.size() - 1).getSeries().get(j).getNombre_serie().contains(
                                         sp.getListaMovies().get(k).getNombre_serie())) {
-                                    System.out.println("SIMOON");
+                               
                                     listaUs.get(listaUs.size() - 1).getSeries().get(j).setCategoria(
                                             sp.getListaMovies().get(k).getCategoria());
                                 }
                             }
                         }
                         
-                        System.out.println("###############################################################");
+                      
                             for (int j = 0; j < listaUs.get(listaUs.size() - 1).getMovies().size(); j++) {
 
                             for (int k = 0; k < sp.getListaMovies().size(); k++) {
-                                System.out.println(listaUs.get(listaUs.size() - 1).getMovies().get(j).getNombre_pelicula() + "---"
-                                        + mp.getListaMovies().get(k).getNombre_pelicula());
+                                
                                 if (listaUs.get(listaUs.size() - 1).getMovies().get(j).getNombre_pelicula().contains(
                                         mp.getListaMovies().get(k).getNombre_pelicula())) {
-                                    System.out.println("SIMOON");
+                                    
                                     listaUs.get(listaUs.size() - 1).getMovies().get(j).setCategoria(
                                             mp.getListaMovies().get(k).getCategoria());
                                 }

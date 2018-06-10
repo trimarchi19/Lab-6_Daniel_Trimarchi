@@ -831,6 +831,7 @@ public class Uniflix extends javax.swing.JFrame {
     private void j_listKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_j_listKeyPressed
         // TODO add your handling code here:
         if(evt.isMetaDown()){
+            System.out.println("---");
             pop.show(true);
         }
     }//GEN-LAST:event_j_listKeyPressed
