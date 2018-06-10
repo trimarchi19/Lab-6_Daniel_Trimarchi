@@ -1,28 +1,4 @@
 admin;admin;;;;
-
-
-
-
-
 daniel;1234;Simpson,Bing Bang Theory,Friends,American Guy,;Nemo,Deadpool,Star war 1,;5873735873;
-
-
-
-
-
 david;1234;American Horror Story,American Guy,Friends,;Nemo,Star Wars 2,Harry Poter 2,Avengers,;893823892823;
-
-
-
-
-yolo;1;Walking Dead,;;27387287238;
-
-
-
-yy;1;Simpson,;Nemo,;827387238723;
-
-
-g;1;Walking Dead,;Inside out,;1271872812;
-
-hh;1;Simpson,;Deadpool,;3311321;
 carlos;1234;Bing Bang Theory,American Guy,;Harry Poter 3,Star Wars 2,Deadpool,;7281787212;

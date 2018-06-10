@@ -100,6 +100,9 @@ public class Uniflix extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        pop = new javax.swing.JPopupMenu();
+        eliiminar = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         ingresar = new javax.swing.JButton();
         registrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -107,6 +110,8 @@ public class Uniflix extends javax.swing.JFrame {
         tf_us = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         tf_con = new javax.swing.JPasswordField();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
 
         jd_registrar.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -180,6 +185,11 @@ public class Uniflix extends javax.swing.JFrame {
         jScrollPane3.setViewportView(j_tree);
 
         j_list.setModel(new DefaultListModel());
+        j_list.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                j_listKeyPressed(evt);
+            }
+        });
         jScrollPane4.setViewportView(j_list);
 
         enviar.setText("-->");
@@ -220,7 +230,7 @@ public class Uniflix extends javax.swing.JFrame {
                 .addContainerGap(68, Short.MAX_VALUE))
         );
 
-        s_m.getContentPane().setLayout(null);
+        s_m.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         buttonGroup1.add(ss);
         ss.setText("Series");
@@ -229,73 +239,55 @@ public class Uniflix extends javax.swing.JFrame {
                 ssActionPerformed(evt);
             }
         });
-        s_m.getContentPane().add(ss);
-        ss.setBounds(10, 20, 120, 30);
+        s_m.getContentPane().add(ss, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 120, 30));
 
         buttonGroup1.add(mm);
         mm.setText("Movies");
-        s_m.getContentPane().add(mm);
-        mm.setBounds(10, 60, 120, 30);
+        s_m.getContentPane().add(mm, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 120, 30));
 
         jLabel7.setText("Productor");
-        s_m.getContentPane().add(jLabel7);
-        jLabel7.setBounds(10, 340, 97, 36);
+        s_m.getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 97, 36));
 
         jLabel11.setText("Categoria");
-        s_m.getContentPane().add(jLabel11);
-        jLabel11.setBounds(10, 97, 97, 36);
+        s_m.getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 97, 97, 36));
 
         jLabel12.setText("Director");
-        s_m.getContentPane().add(jLabel12);
-        jLabel12.setBounds(10, 289, 97, 36);
+        s_m.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 289, 97, 36));
 
         jLabel13.setText("Nombr");
-        s_m.getContentPane().add(jLabel13);
-        jLabel13.setBounds(10, 186, 97, 36);
+        s_m.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 186, 97, 36));
 
         jLabel14.setText("Rating");
-        s_m.getContentPane().add(jLabel14);
-        jLabel14.setBounds(10, 139, 97, 36);
+        s_m.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 139, 97, 36));
 
         jLabel15.setText("Temporadas(si es Serie)");
-        s_m.getContentPane().add(jLabel15);
-        jLabel15.setBounds(10, 235, 143, 36);
+        s_m.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 235, 143, 36));
 
         jLabel16.setText("Id");
-        s_m.getContentPane().add(jLabel16);
-        jLabel16.setBounds(340, 90, 40, 56);
+        s_m.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, 40, 56));
 
         jLabel17.setText("Duracion");
-        s_m.getContentPane().add(jLabel17);
-        jLabel17.setBounds(325, 151, 60, 61);
-        s_m.getContentPane().add(dura);
-        dura.setBounds(390, 160, 100, 40);
+        s_m.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 151, 60, 61));
+        s_m.getContentPane().add(dura, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 100, 40));
 
         cat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 catActionPerformed(evt);
             }
         });
-        s_m.getContentPane().add(cat);
-        cat.setBounds(180, 90, 98, 40);
-        s_m.getContentPane().add(rat);
-        rat.setBounds(180, 140, 98, 40);
+        s_m.getContentPane().add(cat, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 98, 40));
+        s_m.getContentPane().add(rat, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 98, 40));
 
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreActionPerformed(evt);
             }
         });
-        s_m.getContentPane().add(nombre);
-        nombre.setBounds(180, 190, 98, 40);
-        s_m.getContentPane().add(temporada);
-        temporada.setBounds(180, 240, 98, 40);
-        s_m.getContentPane().add(director);
-        director.setBounds(180, 290, 98, 40);
-        s_m.getContentPane().add(productor);
-        productor.setBounds(180, 340, 98, 40);
-        s_m.getContentPane().add(idd);
-        idd.setBounds(390, 90, 98, 40);
+        s_m.getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 98, 40));
+        s_m.getContentPane().add(temporada, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 98, 40));
+        s_m.getContentPane().add(director, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 98, 40));
+        s_m.getContentPane().add(productor, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, 98, 40));
+        s_m.getContentPane().add(idd, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 98, 40));
 
         jButton2.setText("Guardar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -303,12 +295,21 @@ public class Uniflix extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        s_m.getContentPane().add(jButton2);
-        jButton2.setBounds(400, 323, 140, 50);
+        s_m.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 323, 140, 50));
 
         jLabel18.setText("METER SERIES O PELICULAS");
-        s_m.getContentPane().add(jLabel18);
-        jLabel18.setBounds(270, 4, 260, 50);
+        s_m.getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 4, 260, 50));
+
+        eliiminar.setText("eliminar");
+        eliiminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliiminarActionPerformed(evt);
+            }
+        });
+        pop.add(eliiminar);
+
+        jMenuItem2.setText("jMenuItem2");
+        pop.add(jMenuItem2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -333,32 +334,42 @@ public class Uniflix extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Login");
 
+        jLabel19.setText("admin");
+
+        jLabel20.setText("admin");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tf_us)
+                            .addComponent(tf_con, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(195, 195, 195)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tf_us)
-                                    .addComponent(tf_con, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(12, 12, 12)))))
-                .addContainerGap(155, Short.MAX_VALUE))
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(73, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(195, 195, 195)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,11 +379,13 @@ public class Uniflix extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_us, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                    .addComponent(tf_us, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_con, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_con, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addComponent(ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
@@ -483,158 +496,163 @@ public class Uniflix extends javax.swing.JFrame {
 
     private void ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarActionPerformed
         // TODO add your handling code here:
+        try {
+             
+            String us1 = tf_us.getText();
+            String con = tf_con.getText();
+            int actual = 0;
+            int con_us = 0;
+            int cont = 0;
 
-        String us1 = tf_us.getText();
-        String con = tf_con.getText();
-        int actual = 0;
-        int con_us = 0;
-        int cont = 0;
+            System.out.println(us.get(1).getSeries().get(0).getCategoria() + "---" + us.get(1).getSeries().get(0).getNombre_serie());
+            for (Usuarios u : us) {
+                if (u.getCorreo().contains(us1) && u.getContraseña().equals(con)) {
+                    cont = 1;
+                    actual = con_us;
+                }
+                con_us += 1;
+            }
+            if (cont == 0) {
+                JOptionPane.showMessageDialog(this, "No se ha Encontrado el Usuario");
+            }
+            if (cont == 1) {
+                actualizar_list();
+                DefaultListModel modelo = (DefaultListModel) j_list.getModel();
+                modelo.removeAllElements();
+                for (Series s : sp.getListaMovies()) {
+                    modelo.addElement(s);
+                }
+                for (Movies m : mp.getListaMovies()) {
+                    modelo.addElement(m);
+                }
+                DefaultTreeModel modeloARBOL
+                        = (DefaultTreeModel) j_tree.getModel();
+                DefaultMutableTreeNode raiz
+                        = (DefaultMutableTreeNode) modeloARBOL.getRoot();
+                String Categoria = "";
+                String nombre = "";
+               
+                raiz.removeAllChildren();
+                for (int k = 0; k < us.get(actual).getSeries().size(); k++) {
+                    int centinela = -1;
+                    int centinela2 = -1;
 
-        System.out.println(us.get(1).getSeries().get(0).getCategoria() + "---" + us.get(1).getSeries().get(0).getNombre_serie());
-        for (Usuarios u : us) {
-            if (u.getCorreo().contains(us1) && u.getContraseña().equals(con)) {
-                cont = 1;
-                actual = con_us;
-            }
-            con_us += 1;
-        }
-        if (cont == 0) {
-            JOptionPane.showMessageDialog(this, "No se ha Encontrado el Usuario");
-        }
-        if (cont == 1) {
-            actualizar_list();
-            DefaultListModel modelo = (DefaultListModel) j_list.getModel();
-            for (Series s : sp.getListaMovies()) {
-                modelo.addElement(s);
-            }
-            for (Movies m : mp.getListaMovies()) {
-                modelo.addElement(m);
-            }
-            DefaultTreeModel modeloARBOL
-                    = (DefaultTreeModel) j_tree.getModel();
-            DefaultMutableTreeNode raiz
-                    = (DefaultMutableTreeNode) modeloARBOL.getRoot();
-            String Categoria = "";
-            String nombre = "";
-            raiz.removeAllChildren();
-            for (int k = 0; k < us.get(actual).getSeries().size(); k++) {
-                int centinela = -1;
-                int centinela2 = -1;
+                    for (int i = 0; i < raiz.getChildCount(); i++) {
+                        Categoria = us.get(actual).getSeries().get(k).getCategoria();
+                        Categoria = Categoria.replaceAll(" ", "");
+                        if (raiz.getChildAt(i).toString().
+                                contains(Categoria)) {
+                            for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
+                                if (raiz.getChildAt(i).getChildAt(j).toString().
+                                        contains(us.get(actual).getSeries().get(k).getNombre_serie())) {
+                                    centinela2 = 1;
 
-                for (int i = 0; i < raiz.getChildCount(); i++) {
-                    Categoria = us.get(actual).getSeries().get(k).getCategoria();
-                    Categoria = Categoria.replaceAll(" ", "");
-                    if (raiz.getChildAt(i).toString().
-                            contains(Categoria)) {
-                        for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
-                            if (raiz.getChildAt(i).getChildAt(j).toString().
-                                    contains(us.get(actual).getSeries().get(k).getNombre_serie())) {
-                                centinela2 = 1;
+                                }
+                            }
+
+                            if (centinela2 == -1) {
+                                nombre = us.get(actual).getSeries().get(k).getNombre_serie();
+                                nombre = nombre.replaceAll(" ", "");
+                                DefaultMutableTreeNode p
+                                        = new DefaultMutableTreeNode(
+                                                new Series(nombre)
+                                        );
+                                ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
 
                             }
-                        }
-
-                        if (centinela2 == -1) {
-                            nombre = us.get(actual).getSeries().get(k).getNombre_serie();
-                            nombre = nombre.replaceAll(" ", "");
-                            DefaultMutableTreeNode p
-                                    = new DefaultMutableTreeNode(
-                                            new Series(nombre)
-                                    );
-                            ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
+                            centinela = 1;
 
                         }
-                        centinela = 1;
-
                     }
+                    if (centinela == -1) {
+                        Categoria = us.get(actual).getSeries().get(k).getCategoria();
+                        nombre = us.get(actual).getSeries().get(k).getNombre_serie();
+                        Categoria = Categoria.replaceAll(" ", "");
+                        nombre = nombre.replaceAll(" ", "");
+
+                        DefaultMutableTreeNode n
+                                = new DefaultMutableTreeNode(Categoria);
+
+                        DefaultMutableTreeNode p
+                                = new DefaultMutableTreeNode(
+                                        new Series(nombre)
+                                );
+                        n.add(p);
+                        raiz.add(n);
+                    }
+                    //---------------------------------------------------------------------------------
+
                 }
-                if (centinela == -1) {
-                    Categoria = us.get(actual).getSeries().get(k).getCategoria();
-                    nombre = us.get(actual).getSeries().get(k).getNombre_serie();
-                    Categoria = Categoria.replaceAll(" ", "");
-                    nombre = nombre.replaceAll(" ", "");
+                for (int k = 0; k < us.get(actual).getMovies().size(); k++) {
+                    int centinela = -1;
+                    int centinela2 = -1;
 
-                    DefaultMutableTreeNode n
-                            = new DefaultMutableTreeNode(Categoria);
+                    for (int i = 0; i < raiz.getChildCount(); i++) {
+                        Categoria = us.get(actual).getMovies().get(k).getCategoria();
+                        Categoria = Categoria.replaceAll(" ", "");
+                        if (raiz.getChildAt(i).toString().
+                                contains(Categoria)) {
+                            for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
+                                System.out.println("......");
+                                if (raiz.getChildAt(i).getChildAt(j).toString().
+                                        contains(us.get(actual).getMovies().get(k).getNombre_pelicula())) {
+                                    centinela2 = 1;
 
-                    DefaultMutableTreeNode p
-                            = new DefaultMutableTreeNode(
-                                    new Series(nombre)
-                            );
-                    n.add(p);
-                    raiz.add(n);
-                }
-                //---------------------------------------------------------------------------------
+                                }
+                            }
 
-            }
-            for (int k = 0; k < us.get(actual).getMovies().size(); k++) {
-                int centinela = -1;
-                int centinela2 = -1;
-
-                for (int i = 0; i < raiz.getChildCount(); i++) {
-                    Categoria = us.get(actual).getMovies().get(k).getCategoria();
-                    Categoria = Categoria.replaceAll(" ", "");
-                    if (raiz.getChildAt(i).toString().
-                            contains(Categoria)) {
-                        for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
-                            System.out.println("......");
-                            if (raiz.getChildAt(i).getChildAt(j).toString().
-                                    contains(us.get(actual).getMovies().get(k).getNombre_pelicula())) {
-                                centinela2 = 1;
+                            if (centinela2 == -1) {
+                                nombre = us.get(actual).getMovies().get(k).getNombre_pelicula();
+                                nombre = nombre.replaceAll(" ", "");
+                                DefaultMutableTreeNode p
+                                        = new DefaultMutableTreeNode(
+                                                new Movies(nombre)
+                                        );
+                                ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
 
                             }
-                        }
-
-                        if (centinela2 == -1) {
-                            nombre = us.get(actual).getMovies().get(k).getNombre_pelicula();
-                            nombre = nombre.replaceAll(" ", "");
-                            DefaultMutableTreeNode p
-                                    = new DefaultMutableTreeNode(
-                                            new Movies(nombre)
-                                    );
-                            ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
+                            centinela = 1;
 
                         }
-                        centinela = 1;
-
                     }
+                    if (centinela == -1) {
+
+                        Categoria = us.get(actual).getMovies().get(k).getCategoria();
+                        nombre = us.get(actual).getMovies().get(k).getNombre_pelicula();
+                        Categoria = Categoria.replaceAll(" ", "");
+                        nombre = nombre.replaceAll(" ", "");
+
+                        DefaultMutableTreeNode n
+                                = new DefaultMutableTreeNode(Categoria);
+
+                        DefaultMutableTreeNode p
+                                = new DefaultMutableTreeNode(
+                                        new Series(nombre)
+                                );
+                        n.add(p);
+                        raiz.add(n);
+                    }
+                    //---------------------------------------------------------------------------------
+
                 }
-                if (centinela == -1) {
-
-                    Categoria = us.get(actual).getMovies().get(k).getCategoria();
-                    nombre = us.get(actual).getMovies().get(k).getNombre_pelicula();
-                    Categoria = Categoria.replaceAll(" ", "");
-                    nombre = nombre.replaceAll(" ", "");
-
-                    DefaultMutableTreeNode n
-                            = new DefaultMutableTreeNode(Categoria);
-
-                    DefaultMutableTreeNode p
-                            = new DefaultMutableTreeNode(
-                                    new Series(nombre)
-                            );
-                    n.add(p);
-                    raiz.add(n);
+                if (us.get(actual).getCorreo().contains("admin")) {
+                    agregar.setVisible(true);
+                } else {
+                    agregar.setVisible(false);
                 }
-                //---------------------------------------------------------------------------------
-
+                modeloARBOL.reload();
+                j_list.setModel(modelo);
+                j_list.setModel(modelo);
+                aplicacion.setModal(true);
+                aplicacion.pack();
+                aplicacion.setLocationRelativeTo(this);
+                aplicacion.setVisible(true);
+                tf_con.setText("");
+                tf_us.setText("");
             }
-            if (us.get(actual).getCorreo().contains("admin")) {
-                agregar.setVisible(true);
-            } else {
-                agregar.setVisible(false);
-            }
-            modeloARBOL.reload();
+        } catch (Exception e) {
 
-            j_list.setModel(modelo);
-            aplicacion.setModal(true);
-            aplicacion.pack();
-            aplicacion.setLocationRelativeTo(this);
-            aplicacion.setVisible(true);
-            tf_con.setText("");
-            tf_us.setText("");
         }
-
 
     }//GEN-LAST:event_ingresarActionPerformed
 
@@ -648,104 +666,110 @@ public class Uniflix extends javax.swing.JFrame {
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
         // TODO add your handling code here:
-        if (j_list.getSelectedIndex() >= 0) {
-            DefaultTreeModel modeloARBOL
-                    = (DefaultTreeModel) j_tree.getModel();
-            DefaultMutableTreeNode raiz
-                    = (DefaultMutableTreeNode) modeloARBOL.getRoot();
-            //obtener la persona a guardar
-            DefaultListModel modeloLISTA
-                    = (DefaultListModel) j_list.getModel();
-            String Categoria, nombre;
-            int edad;
-            int centinela = -1;
-            int centinela2 = -1;
-            if (modeloLISTA.get(j_list.getSelectedIndex()) instanceof Series) {
-                Categoria = ((Series) modeloLISTA.get(j_list.getSelectedIndex())).getCategoria();
-                nombre = ((Series) modeloLISTA.get(j_list.getSelectedIndex())).getNombre_serie();
-                Categoria = Categoria.replaceAll(" ", "");
-                nombre = nombre.replaceAll(" ", "");
-                for (int i = 0; i < raiz.getChildCount(); i++) {
-                    if (Categoria.
-                            contains(raiz.getChildAt(i).toString())) {
+        try {
+            if (j_list.getSelectedIndex() >= 0) {
+                DefaultTreeModel modeloARBOL
+                        = (DefaultTreeModel) j_tree.getModel();
+                DefaultMutableTreeNode raiz
+                        = (DefaultMutableTreeNode) modeloARBOL.getRoot();
+                //obtener la persona a guardar
+                DefaultListModel modeloLISTA
+                        = (DefaultListModel) j_list.getModel();
+                String Categoria, nombre;
+                int edad;
+                int centinela = -1;
+                int centinela2 = -1;
+                if (modeloLISTA.get(j_list.getSelectedIndex()) instanceof Series) {
+                    Categoria = ((Series) modeloLISTA.get(j_list.getSelectedIndex())).getCategoria();
+                    nombre = ((Series) modeloLISTA.get(j_list.getSelectedIndex())).getNombre_serie();
+                    Categoria = Categoria.replaceAll(" ", "");
+                    nombre = nombre.replaceAll(" ", "");
+                    for (int i = 0; i < raiz.getChildCount(); i++) {
+                        if (Categoria.
+                                contains(raiz.getChildAt(i).toString())) {
 
-                        for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
-                            if (raiz.getChildAt(i).getChildAt(j).toString().
-                                    equals(nombre)) {
-                                centinela2 = 1;
+                            for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
+                                if (raiz.getChildAt(i).getChildAt(j).toString().
+                                        equals(nombre)) {
+                                    centinela2 = 1;
+
+                                }
+                            }
+
+                            if (centinela2 == -1) {
+                                DefaultMutableTreeNode p
+                                        = new DefaultMutableTreeNode(
+                                                new Series(nombre, Categoria)
+                                        );
+                                ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
 
                             }
-                        }
-
-                        if (centinela2 == -1) {
-                            DefaultMutableTreeNode p
-                                    = new DefaultMutableTreeNode(
-                                            new Series(nombre, Categoria)
-                                    );
-                            ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
+                            centinela = 1;
 
                         }
-                        centinela = 1;
-
                     }
-                }
-                if (centinela == -1) {
-                    DefaultMutableTreeNode n
-                            = new DefaultMutableTreeNode(Categoria);
+                    if (centinela == -1) {
+                        DefaultMutableTreeNode n
+                                = new DefaultMutableTreeNode(Categoria);
 
-                    DefaultMutableTreeNode p
-                            = new DefaultMutableTreeNode(
-                                    new Series(nombre,
-                                            Categoria)
-                            );
-                    n.add(p);
-                    raiz.add(n);
-                }
-            } else if (modeloLISTA.get(j_list.getSelectedIndex()) instanceof Movies) {
-                Categoria = ((Movies) modeloLISTA.get(j_list.getSelectedIndex())).getCategoria();
-                nombre = ((Movies) modeloLISTA.get(j_list.getSelectedIndex())).getNombre_pelicula();
-                Categoria = Categoria.replaceAll(" ", "");
-                nombre = nombre.replaceAll(" ", "");
-                for (int i = 0; i < raiz.getChildCount(); i++) {
-                    if (Categoria.
-                            contains(raiz.getChildAt(i).toString())) {
+                        DefaultMutableTreeNode p
+                                = new DefaultMutableTreeNode(
+                                        new Series(nombre,
+                                                Categoria)
+                                );
+                        n.add(p);
+                        raiz.add(n);
+                    }
+                } else if (modeloLISTA.get(j_list.getSelectedIndex()) instanceof Movies) {
+                    Categoria = ((Movies) modeloLISTA.get(j_list.getSelectedIndex())).getCategoria();
+                    nombre = ((Movies) modeloLISTA.get(j_list.getSelectedIndex())).getNombre_pelicula();
+                    Categoria = Categoria.replaceAll(" ", "");
+                    nombre = nombre.replaceAll(" ", "");
+                    for (int i = 0; i < raiz.getChildCount(); i++) {
+                        if (Categoria.
+                                contains(raiz.getChildAt(i).toString())) {
 
-                        for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
-                            if (raiz.getChildAt(i).getChildAt(j).toString().
-                                    contains(nombre)) {
-                                centinela2 = 1;
+                            for (int j = 0; j < raiz.getChildAt(i).getChildCount(); j++) {
+                                if (raiz.getChildAt(i).getChildAt(j).toString().
+                                        contains(nombre)) {
+                                    centinela2 = 1;
+
+                                }
+                            }
+
+                            if (centinela2 == -1) {
+                                DefaultMutableTreeNode p
+                                        = new DefaultMutableTreeNode(
+                                                new Movies(nombre, Categoria)
+                                        );
+                                ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
 
                             }
-                        }
-
-                        if (centinela2 == -1) {
-                            DefaultMutableTreeNode p
-                                    = new DefaultMutableTreeNode(
-                                            new Movies(nombre, Categoria)
-                                    );
-                            ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
+                            centinela = 1;
 
                         }
-                        centinela = 1;
-
                     }
-                }
-                if (centinela == -1) {
-                    DefaultMutableTreeNode n
-                            = new DefaultMutableTreeNode(Categoria);
+                    if (centinela == -1) {
+                        DefaultMutableTreeNode n
+                                = new DefaultMutableTreeNode(Categoria);
 
-                    DefaultMutableTreeNode p
-                            = new DefaultMutableTreeNode(
-                                    new Movies(nombre,
-                                            Categoria)
-                            );
-                    n.add(p);
-                    raiz.add(n);
+                        DefaultMutableTreeNode p
+                                = new DefaultMutableTreeNode(
+                                        new Movies(nombre,
+                                                Categoria)
+                                );
+                        n.add(p);
+                        raiz.add(n);
+                    }
+
                 }
 
+                modeloARBOL.reload();
             }
-            modeloARBOL.reload();
+        } catch (Exception e) {
+
         }
+
     }//GEN-LAST:event_enviarActionPerformed
 
     private void ssActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ssActionPerformed
@@ -761,47 +785,60 @@ public class Uniflix extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        if(!(this.nombre.getText().isEmpty()||cat.getText().isEmpty()||this.director.getText().isEmpty()||
-           this.productor.getText().isEmpty()    ||temporada.getText().isEmpty() ||dura.getText().isEmpty()||
-               rat.getText().isEmpty() ||idd.getText().isEmpty()
-                )){
-        String nombre,categoria,id,duracion,temporadas,rating,director,productor,tipo="";
-        nombre=this.nombre.getText();
-        categoria=cat.getText();
-        id=idd.getText();
-        duracion=dura.getText();
-        rating =rat.getText();
-        director=this.director.getText();
-        productor=this.productor.getText();
-        temporadas=temporada.getText();
-        if(ss.isSelected()){
-            tipo="s";
-        }else if(mm.isSelected()){
-            tipo="m";
-        }
-         DefaultListModel modelo=(DefaultListModel) j_list.getModel();
-        if(tipo.equals("s")){
-           
-            modelo.addElement(new Series(id, nombre,categoria,temporadas, director, productor,rating,duracion));
-            
-            
-        }else if(tipo.equals("m")){
-         modelo.addElement(new Movies(id, nombre,categoria, director, productor,rating,duracion));
-            
-        }
-        this.nombre.setText("");
-        this.director.setText("");
-        this.productor.setText("");
-        dura.setText("");
-        rat.setText("");
-        temporada.setText("");
-        idd.setText("");
-        cat.setText("");
-        }else{
-            JOptionPane.showMessageDialog(this, "Debe LLenar Todos Los Parametros");
+        try {
+            if (!(this.nombre.getText().isEmpty() || cat.getText().isEmpty() || this.director.getText().isEmpty()
+                    || this.productor.getText().isEmpty() || temporada.getText().isEmpty() || dura.getText().isEmpty()
+                    || rat.getText().isEmpty() || idd.getText().isEmpty())) {
+                String nombre, categoria, id, duracion, temporadas, rating, director, productor, tipo = "";
+                nombre = this.nombre.getText();
+                categoria = cat.getText();
+                id = idd.getText();
+                duracion = dura.getText();
+                rating = rat.getText();
+                director = this.director.getText();
+                productor = this.productor.getText();
+                temporadas = temporada.getText();
+                if (ss.isSelected()) {
+                    tipo = "s";
+                } else if (mm.isSelected()) {
+                    tipo = "m";
+                }
+                DefaultListModel modelo = (DefaultListModel) j_list.getModel();
+                if (tipo.equals("s")) {
+                    modelo.addElement(new Series(id, nombre, categoria, temporadas, director, productor, rating, duracion));
+
+                } else if (tipo.equals("m")) {
+                    modelo.addElement(new Movies(id, nombre, categoria, director, productor, rating, duracion));
+
+                }
+                this.nombre.setText("");
+                this.director.setText("");
+                this.productor.setText("");
+                dura.setText("");
+                rat.setText("");
+                temporada.setText("");
+                idd.setText("");
+                cat.setText("");
+                j_list.setModel(modelo);
+            } else {
+                JOptionPane.showMessageDialog(this, "Debe LLenar Todos Los Parametros");
+            }
+        } catch (Exception e) {
+
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void j_listKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_j_listKeyPressed
+        // TODO add your handling code here:
+        if(evt.isMetaDown()){
+            pop.show(true);
+        }
+    }//GEN-LAST:event_j_listKeyPressed
+
+    private void eliiminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliiminarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_eliiminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -849,6 +886,7 @@ public class Uniflix extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_series;
     private javax.swing.JTextField director;
     private javax.swing.JTextField dura;
+    private javax.swing.JMenuItem eliiminar;
     private javax.swing.JToggleButton enviar;
     private javax.swing.JTextField idd;
     private javax.swing.JButton ingresar;
@@ -864,7 +902,9 @@ public class Uniflix extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -872,6 +912,7 @@ public class Uniflix extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -883,6 +924,7 @@ public class Uniflix extends javax.swing.JFrame {
     private javax.swing.JDialog jd_registrar;
     private javax.swing.JRadioButton mm;
     private javax.swing.JTextField nombre;
+    private javax.swing.JPopupMenu pop;
     private javax.swing.JTextField productor;
     private javax.swing.JPasswordField r_con;
     private javax.swing.JTextField r_trajeta;
